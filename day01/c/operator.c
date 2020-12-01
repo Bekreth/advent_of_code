@@ -10,11 +10,14 @@ Operator * newOperator(Node *tree) {
 }
 
 bool operateOnTree(Operator *op, Node *tree, bool(*operator)(Operator *, Node *)) {
+    //printNode(tree);
     if (operator(op, tree)) {
         return true;
-    } else if (operateOnTree(op, tree->left, operator)) {
+    } else if (tree->left && operateOnTree(op, tree->left, operator)) {
         return true;
-    } else if(operateOnTree(op, tree->right, operator)) {
+    } else if (!tree->left) {
+        return false;
+    } else if (tree->right && operateOnTree(op, tree->right, operator)) {
         return true;
     } else {
         return false;

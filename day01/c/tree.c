@@ -22,9 +22,9 @@ void printNode(Node *node) {
     }
 
     if (node->right) {
-        printf("value left: %d\n", node->right->value);
+        printf("value right: %d\n", node->right->value);
     } else {
-        printf("value left: null\n");
+        printf("value right: null\n");
     }
     printf("---\n");
 }
@@ -57,7 +57,7 @@ Node * loadTree(int *input) {
     Node * output = newNode(MIDPOINT);
     //printNode(output);
 
-    for (int i = 0; i < 256; i++) {
+    for (int i = 0; i < 200; i++) {
         int valueAtIndex = input[i];
         //printf("index %d, value: %d\n", i, valueAtIndex);
         if (valueAtIndex == 0) break;
