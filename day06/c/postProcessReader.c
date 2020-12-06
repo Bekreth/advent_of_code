@@ -1,6 +1,6 @@
 #include "../../utils/fileReader/postProcessReader.h"
 
-int postProcessorBufferSize = 6;
+int postProcessorBufferSize = 5;
 
 ProcessorOutput applyProcessor(int dataRead, bool suspicious, PostProcessor processor) {
     bool readIntoCurrent = true;
@@ -51,7 +51,7 @@ ProcessorOutput applyProcessor(int dataRead, bool suspicious, PostProcessor proc
         }
     }
 
-    printProcessor(processor);
+    //printProcessor(processor);
 
     ProcessorOutput output = {readIntoCurrent, suspicious};
     return output;
