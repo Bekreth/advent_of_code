@@ -12,6 +12,6 @@ build/%.o: %.c | build/
 	@gcc -g -c -o $@ $<
 
 clean:
-	@rm -rf lib/
+	@rm -rf build/
 
 compile: $(SOURCE_FILE) | build/

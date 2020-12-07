@@ -10,7 +10,7 @@ void solveSilver(Passport **passports, int elementCount) {
     printf("solving silver\n");
     int counter = 0;
     for (int i = 0; i < elementCount; i++) {
-        if (isPassportValid(passports[i])) counter++;
+        if (isPassportSilver(passports[i])) counter++;
     }
     printf("there were %d valid passports \n", counter);
 }

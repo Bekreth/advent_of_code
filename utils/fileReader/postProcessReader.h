@@ -17,19 +17,6 @@ typedef struct PostProcessor {
     int *nextEntryIndex;
 } PostProcessor;
 
-void printProcessor(PostProcessor processor) {
-
-    printf("====buffer contents====\n");
-    printf("%s---\n", processor.buffer);
-    printf("----register contents----\n");
-    printf("-c entry: index %d\n", *processor.currentEntryIndex);
-    printf("%s---\n", processor.currentEntry);
-    printf("-n entry: index %d\n", *processor.nextEntryIndex);
-    printf("%s---\n", processor.nextEntry);
-    printf("****    end    ****\n");
-
-}
-
 typedef struct ProcessorOutput {
     bool readIntoCurrent;
     bool suspicious;
@@ -37,5 +24,7 @@ typedef struct ProcessorOutput {
 
 
 ProcessorOutput applyProcessor(int dataRead, bool suspicious, PostProcessor processor);
+
+void printProcessor(PostProcessor processor);
 
 #endif

@@ -19,7 +19,7 @@ typedef struct Passport {
 
 Passport * newPassport(char *input);
 
-bool isPassportValid(Passport * passport);
+bool isPassportSilver(Passport * passport);
 
 void printPassport(Passport *passport);
 

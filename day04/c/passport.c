@@ -107,7 +107,7 @@ Passport * newPassport(char *input) {
 
 void printPassport(Passport *passport) {
     printf("== Passport == ");
-    if (isPassportValid(passport)) printf("vvvvvv\n");
+    if (isPassportSilver(passport)) printf("vvvvvv\n");
     else printf("!! INVALID !!\n");
     printf("Birth Year\t: %s\n", passport->birthYear);
     printf("Issue Year\t: %s\n", passport->issueYear);
@@ -121,7 +121,7 @@ void printPassport(Passport *passport) {
 }
 
 
-bool isPassportValid(Passport * passport) {
+bool isPassportSilver(Passport * passport) {
     if (strcmp(passport->birthYear, "") == 0) return false;
     if (strcmp(passport->issueYear, "") == 0) return false;
     if (strcmp(passport->expirationYear, "") == 0) return false;
@@ -130,4 +130,39 @@ bool isPassportValid(Passport * passport) {
     if (strcmp(passport->eyeColor, "") == 0) return false;
     if (strcmp(passport->passportID, "") == 0) return false;
     return true;
+}
+
+bool isPassportGold(Passport * passport) {
+    int birthYear = atoi(*passport->birthYear);
+    if (birthYear < 1920 || birthYear > 2002) return false;
+    int issueYear = atoi(*passport->issueYear);
+    if (issueYear < 2010 || issueYear > 2020) return false;
+    int expirationYear = atoi(*passport->expirationYear);
+    if (expirationYear < 2020 || expirationYear > 2030) return false;
+    
+}
+
+bool validHeight(char* height) {
+
+}
+
+bool validHairColor(char* hairColor) {
+
+}
+
+bool validEyeColor(char* eyeColor) {
+    if (strcmp(eyeColor, "amb")) return true;
+    if (strcmp(eyeColor, "blu")) return true;
+    if (strcmp(eyeColor, "brn")) return true;
+    if (strcmp(eyeColor, "gry")) return true;
+    if (strcmp(eyeColor, "grn")) return true;
+    if (strcmp(eyeColor, "hzl")) return true;
+    if (strcmp(eyeColor, "oth")) return true;
+    return false;
+}
+bool validHeight(char* height) {
+
+}
+bool validHeight(char* height) {
+
 }

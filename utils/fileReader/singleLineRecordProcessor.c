@@ -3,6 +3,7 @@
 #include <stdbool.h>
 
 #include "postProcessReader.h"
+#include "postProcessDebugger.c"
 
 ProcessorOutput applyProcessor(int dataRead, bool suspicious, PostProcessor processor) {
     bool readIntoCurrent = true;
@@ -11,39 +12,22 @@ ProcessorOutput applyProcessor(int dataRead, bool suspicious, PostProcessor proc
             case '\n':
                 readIntoCurrent = false;
                 processor.currentEntry[*processor.currentEntryIndex] = '!';
-                *processor.currentEntryIndex++;
-
-                if (readIntoCurrent) {
-                } else {
-                    processor.nextEntry[*processor.nextEntryIndex] = ' ';
-                    *processor.nextEntryIndex++;
-                }
+                (*processor.currentEntryIndex)++;
                 break;
             
             default:
-                if (suspicious) {
-                    suspicious = false;
-                    processor.currentEntry[*processor.currentEntryIndex] = ' ';
-                    *processor.currentEntryIndex++;
-                }
                 if (readIntoCurrent) {
                     processor.currentEntry[*processor.currentEntryIndex] = processor.buffer[i];
-                    *processor.currentEntryIndex++;
+                    (*processor.currentEntryIndex)++;
                 } else {
                     processor.nextEntry[*processor.nextEntryIndex] = processor.buffer[i];
-                    *processor.nextEntryIndex++;
+                    (*processor.nextEntryIndex)++;
                 }
                 break;
         }
     }
 
-    //printf("====buffer contents====\n");
-    //printf("%s\n", buffer);
-    //printf("----register contents----\n");
-    //printf("-c entry\n");
-    //printf("%s\n", currentEntry);
-    //printf("-n entry\n");
-    //printf("%s\n", nextEntry);
-    //printf("****    end    ****\n");
-
+    // printProcessor(processor);
+    ProcessorOutput output = {readIntoCurrent, false};
+    return output;
 }
