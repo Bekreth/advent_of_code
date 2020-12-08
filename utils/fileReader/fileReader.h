@@ -8,5 +8,7 @@ typedef struct FileData {
 
 FileData readFile(char* input);
 
+void printFileData(FileData data);
+
 #endif
 

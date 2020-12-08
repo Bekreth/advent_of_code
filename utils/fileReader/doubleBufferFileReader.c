@@ -78,3 +78,9 @@ FileData readFile(char *fileLocation) {
     printf("file read\n\n");
     return output;
 }
+
+void printFileData(FileData data) {
+    for (int i = 0; i < data.size; i++) {
+        printf("%s\n", data.data[i]);
+    }
+}
