@@ -9,7 +9,7 @@ build/:
 	@mkdir build
 
 build/%.o: %.c | build/
-	@gcc -g -c -o $@ $<
+	@gcc  -c -o $@ $<
 
 clean:
 	@rm -rf build/

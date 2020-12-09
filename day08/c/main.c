@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include <unistd.h>
 
 #include "../../utils/bootCode/bootCode.h"
 #include "../../utils/fileReader/fileReader.h"
@@ -79,5 +78,4 @@ int main(int argc, char **argv) {
     Application app = createApplication(fileData);
     solveSilver(app);
     solveGold(app);
-    sleep(20);
 }
