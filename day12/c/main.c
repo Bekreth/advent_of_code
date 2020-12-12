@@ -4,20 +4,38 @@
 #include "../../utils/fileReader/fileReader.h"
 #include "direction.h"
 #include "ferry.h"
+#include "navigationFerry.h"
 
 int postProcessorBufferSize = 2;
 
-int manhatanDistance(Ferry* ferry) {
+int manhatanDistance(int posX, int posY) {
     int absoluteX;
     int absoluteY;
 
-    if (ferry->posX < 0) absoluteX = -1 * ferry->posX;
-    else absoluteX = ferry->posX;
+    if (posX < 0) absoluteX = -1 * posX;
+    else absoluteX = posX;
 
-    if (ferry->posY < 0) absoluteY = -1 * ferry->posY;
-    else absoluteY = ferry->posY;
+    if (posY < 0) absoluteY = -1 * posY;
+    else absoluteY = posY;
 
     return absoluteX + absoluteY;
+}
+
+void solveGold(Instruction** instructions, int length) {
+    printf("solving gold\n");
+    NavFerry* navFerry = malloc(sizeof(NavFerry));
+    navFerry->waypoint = malloc(sizeof(Waypoint));
+    navFerry->waypoint->posX = 10;
+    navFerry->waypoint->posY = 1;
+    navFerry->posX = 0;
+    navFerry->posY = 0;
+
+    applyNavInstructions(navFerry, instructions, length);
+    printNavFerry(navFerry);
+    printf("manhatan distance: %d\n", manhatanDistance(navFerry->posX, navFerry->posY));
+
+    free(navFerry->waypoint);
+    free(navFerry);
 }
 
 void solveSilver(Instruction** instructions, int length) {
@@ -29,10 +47,10 @@ void solveSilver(Instruction** instructions, int length) {
 
     applyInstructions(ferry, instructions, length);
     printFerry(ferry);
-    printf("manhatan distance: %d\n", manhatanDistance(ferry));
+    printf("manhatan distance: %d\n", manhatanDistance(ferry->posX, ferry->posY));
 
     free(ferry);
-    freeInstructions(instructions, length);
+    printf("\n");
     // 435 is too high
 }
 
@@ -47,6 +65,8 @@ int main(int argc, char** argv) {
     }
     free(fileData.data);
 
-
     solveSilver(instructions, length);
+    solveGold(instructions, length);
+
+    freeInstructions(instructions, length);
 }
