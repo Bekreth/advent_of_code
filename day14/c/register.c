@@ -13,7 +13,7 @@ int registerNumber(char* input) {
     int bufferSize = regEndIndex+1 - regStartIndex;
     char* regBuffer = malloc(bufferSize * sizeof(char));
     memcpy(regBuffer, input + regStartIndex, bufferSize);
-    int output = atoi(regBuffer);
+    int output = atoll(regBuffer);
     free(regBuffer);
     return output;
 }
@@ -39,6 +39,7 @@ Register* newRegister(char* input) {
 
     output->id = registerNumber(input);
     output->value = registerValue(input);
+    output->floatingMask = 0ULL;
 
     return output;
 }
@@ -49,6 +50,14 @@ void freeRegister(Register* reg) {
 
 void printRegister(Register* reg) {
     printf("== Register ==\n");
-    printf("ID:\t%d\n", reg->id);
+    printf("ID:\t%lld\n", reg->id);
     printf("value:\t%lld\n", reg->value);
+    printf("floating:%lld\n", reg->floatingMask);
+}
+
+void printRegisters(Registers* registers) {
+    printf("-=-= REGISTERS =-=-\n");
+    for (int i = 0; i < registers->size; i++) {
+        printRegister(registers->reg[i]);
+    }
 }

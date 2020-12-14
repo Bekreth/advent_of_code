@@ -27,13 +27,32 @@ BitMask* newMask(char* input) {
         case '0':
             output->zerosMask |= (1ULL << (END - i));
             break;
+
+        case 'X':
+            output->floatingMask |= (1ULL << (END - i));
+            break;
         }
     }
     return output;
 }
 
+void applyGoldMask(BitMask* mask, Register* reg) {
+    // reg->value |= mask->zerosMask;
+    // reg->floatingMask |= mask->zerosMask;
 
-void applyMask(BitMask* mask, Register* reg) {
+    reg->value |= mask->onesMask;
+    reg->floatingMask |= mask->floatingMask;
+
+    reg->value = ~reg->value;
+    reg->value |= mask->floatingMask;
+    reg->value = ~reg->value;
+
+    reg->floatingMask = ~reg->floatingMask;
+    reg->floatingMask |= mask->onesMask;
+    reg->floatingMask = ~reg->floatingMask;
+}
+
+void applySilverMask(BitMask* mask, Register* reg) {
     reg->value |= mask->onesMask;
     reg->value = ~reg->value;
     reg->value |= mask->zerosMask;
@@ -46,6 +65,8 @@ void printMask(BitMask* mask) {
     showLongLongBits(mask->onesMask);
     printf("zeros : ");
     showLongLongBits(mask->zerosMask);
+    printf("X-es  : ");
+    showLongLongBits(mask->floatingMask);
 }
 
 void freeMask(BitMask* mask) {

@@ -30,6 +30,9 @@ debugger: $(BIN)
 test: $(BIN)
 	@$(BIN) ../input/sample.txt 5
 
+test2: $(BIN)
+	@$(BIN) ../input/sample2.txt 5
+
 vtest: $(BIN)
 	valgrind --leak-check=yes $(BIN) ../input/sample.txt 5
 
