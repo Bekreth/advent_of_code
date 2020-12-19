@@ -110,6 +110,30 @@ bool existsInEntry(Entry* entry, void* data) {
     return false;
 }
 
+SearchResults* searchTable(HashTable* table, bool(*predicate)(void*)) {
+    SearchResults* results = malloc(sizeof(SearchResults));
+    results->size = 0;
+    results->data = malloc(0);
+
+    Entry* entry;
+    for (int i = 0; i < table->capacity; i++) {
+        entry = table->data[i];
+        for (int j = 0; j < entry->capacity; j++) {
+            if (predicate(entry->data[j])) {
+                results->size++;
+                results->data = realloc(results->data, results->size * sizeof(void*));
+                results->data[results->size - 1] = entry->data[j];
+            }
+        }
+    }
+    return results;
+}
+
+void freeSearchResults(SearchResults* results) {
+    free(results->data);
+    free(results);
+}
+
 void printHashTable(HashTable* table) {
     printf("== Hash Table ==\n");
     for (int i = 0; i < table->capacity; i++) {

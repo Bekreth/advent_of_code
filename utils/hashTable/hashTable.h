@@ -16,8 +16,15 @@ typedef struct HashTable {
     Entry** data;
 } HashTable;
 
+typedef struct SearchResults {
+    int size;
+    void** data;
+} SearchResults;
+
 HashTable* newHashTable(unsigned int size);
 void freeHashTable(HashTable* hashTable);
+
+void freeSearchResults(SearchResults* searchResults);
 
 extern unsigned int hash(void* data);
 extern bool equals(void* data1, void* data2);
@@ -25,6 +32,7 @@ extern bool equals(void* data1, void* data2);
 void addData(HashTable* hashTable, void* data);
 void removeData(HashTable* hashTable, void* data);
 bool exists(HashTable* hashTable, void* data);
+SearchResults* searchTable(HashTable* HashTable, bool(*predicate)(void*));
 
 void printHashTable(HashTable* table);
 void printEntry(Entry* entry);
