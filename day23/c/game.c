@@ -4,39 +4,33 @@
 #include "game.h"
 
 void extractCups(Game* game);
-Cup* newCup(char value);
-char calculateNextValue(char base, char index);
+Cup* newCup(int value);
+int calculateNextValue(Game* game, int base);
 void insertCups(Game* game, Cup* target);
 
-Game* newGame(char input[9]) {
+Game* newGame(int* input, int size) {
     Game* game = malloc(sizeof(Game));
-    Cup* cups[9] = {0};
-    for (int i = 0; i < 9; i++) {
-        cups[i] = newCup(input[i]);
+    game->size = size;
+    Cup** cups = calloc(size, sizeof(Cup*));
+    for (int i = 0; i < size; i++) {
+        cups[i] = malloc(sizeof(Cup));
+        cups[i]->value = input[i];
     }
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < size - 1; i++) {
         cups[i]->nextCup = cups[i+1];
     }
-    cups[8]->nextCup = cups[0];
-    game->currentCup = cups[0];
-    return game;
-}
 
-Cup* newCup(char value) {
-    Cup* output = malloc(sizeof(Cup));
-    output->value = atoi(&value);
-    return output;
+    cups[size-1]->nextCup = cups[0];
+    game->currentCup = cups[0];
+
+    free(cups);
+    return game;
 }
 
 void playRound(Game* game) {
     extractCups(game);
-    Cup* targetCup = NULL;
-    int index = 0;
-    while (targetCup == NULL) {
-        index++;
-        targetCup = searchForCup(game, 
-            calculateNextValue(game->currentCup->value, index));
-    }
+    int searchTarget = calculateNextValue(game, game->currentCup->value);
+    Cup* targetCup = searchForCup(game, searchTarget);
     insertCups(game, targetCup);
     game->currentCup = game->currentCup->nextCup;
 }
@@ -46,7 +40,7 @@ void extractCups(Game* game) {
     game->currentCup->nextCup = game->currentCup->nextCup->nextCup->nextCup->nextCup;
 }
 
-Cup* searchForCup(Game* game, char value) {
+Cup* searchForCup(Game* game, int value) {
     Cup* walkingCup = game->currentCup;
     Cup* possibleOutput = walkingCup->nextCup;
     while (possibleOutput->value != game->currentCup->value) {
@@ -59,9 +53,16 @@ Cup* searchForCup(Game* game, char value) {
     return NULL;
 }
 
-char calculateNextValue(char base, char index) {
-    char output = base - index;
-    if (output < 1) output += 9;
+int calculateNextValue(Game* game, int base) {
+    int output = base - 1;
+    if (output < 1) output += game->size;
+    Cup* extractedHead = game->headOfExtracted;
+    for (int i = 0; i < 3; i++) {
+        if (extractedHead->value == output) {
+            return calculateNextValue(game, output);
+        }
+        extractedHead = extractedHead->nextCup;
+    }
     return output;
 }
 
@@ -74,7 +75,7 @@ void insertCups(Game* game, Cup* target) {
 
 void freeGame(Game* game) {
     Cup* holder;
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < game->size; i++) {
         holder = game->currentCup->nextCup;
         free(game->currentCup);
         game->currentCup = holder;
@@ -85,7 +86,7 @@ void freeGame(Game* game) {
 void printGame(Game* game) {
     Cup* holder = game->currentCup;
     printf(" -");
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < game->size; i++) {
         printf(" %d", holder->value);
         holder = holder->nextCup;
     }

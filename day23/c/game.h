@@ -2,18 +2,19 @@
 #define game_h
 
 typedef struct Cup {
-    char value;
+    int value;
     struct Cup* nextCup;
 } Cup;
 
 typedef struct Game {
+    int size;
     Cup* currentCup;
     Cup* headOfExtracted;
 } Game;
 
-Game* newGame(char input[9]);
+Game* newGame(int* input, int size);
 void playRound(Game* game);
-Cup* searchForCup(Game* game, char value);
+Cup* searchForCup(Game* game, int value);
 
 void freeGame(Game* game);
 void printGame(Game* game);
