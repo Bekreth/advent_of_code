@@ -2,7 +2,6 @@ use std::fs;
 use std::u32;
 use std::env;
 
-#[derive(Debug)]
 struct Window {
     total: u32
 }
@@ -10,17 +9,19 @@ struct Window {
 struct WindowAggregator {
     previous_depth: u32,
     depth_increases: u32,
-    windows: [Option<Window>; 3],
+    windows: Vec<Option<Window>>,
     window_head: usize,
+    max_head: usize
 }
 
 impl WindowAggregator {
-    fn new() -> Self {
+    fn new(max_head: usize) -> Self {
         WindowAggregator{
             previous_depth: u32::MAX,
             depth_increases: 0,
-            windows: [None, None, None],
+            windows: (0..max_head).map(|_|None).collect::<Vec<Option<Window>>>(),
             window_head: 0,
+            max_head: max_head,
         }
     }
 
@@ -43,7 +44,13 @@ impl WindowAggregator {
         let new_window = Window{total: measurement};
         self.windows[self.window_head] = Some(new_window);
         self.window_head += 1;
-        self.window_head %= self.windows.len();
+        self.window_head %= self.max_head;
+    }
+
+    fn finalize(&mut self) {
+        for _ in 0..self.max_head {
+            self.add_measurement(0);
+        }
     }
 }
 
@@ -54,13 +61,16 @@ fn main() {
         .expect("Unable to read file");
 
 
-    let mut aggregator = WindowAggregator::new();
+    let mut silver_aggregator = WindowAggregator::new(1);
+    let mut gold_aggregator = WindowAggregator::new(3);
     for (_, line) in contents.lines().enumerate() {
         let measurement = line.parse().unwrap();
-        aggregator.add_measurement(measurement);
+        gold_aggregator.add_measurement(measurement);
+        silver_aggregator.add_measurement(measurement);
     }
-    aggregator.add_measurement(0);
-    aggregator.add_measurement(0);
+    silver_aggregator.finalize();
+    gold_aggregator.finalize();
 
-    println!("number of depth increases: {}", aggregator.depth_increases);
+    println!("Silver: number of depth increases: {}", silver_aggregator.depth_increases);
+    println!("Gold  : number of depth increases: {}", gold_aggregator.depth_increases);
 }
