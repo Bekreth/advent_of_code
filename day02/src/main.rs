@@ -1,8 +1,11 @@
 use std::fs;
 
 fn main() {
-    let filename = "input_data.txt";
+    let args: Vec<String> = env::args().collect();
+    let filename =args.get(1).expect("missing filename");
     let contents = fs::read_to_string(filename)
         .expect("Unable to read file");
-    println!("{}", contents);
+
+    // println!("Silver: {}", silver_aggregator.depth_increases);
+    // println!("Gold  : number of depth increases: {}", gold_aggregator.depth_increases);
 }
