@@ -1,23 +1,69 @@
+use std::fmt::Error;
+use std::fmt::Formatter;
+use std::fmt::Display;
 use std::fs;
-use std::u32;
 use std::env;
 
 struct Positioning {
     x: i32,
     y: i32,
-    aim: i32
 }
 
 impl Positioning {
     fn new(direction: &str, value: i32) -> Self {
         match direction {
-            "forward" => Positioning{x: value, y: 0, aim: 0},
-            "up" => Positioning{x: 0, y: 0, aim: -value},
-            "down" => Positioning{x: 0, y: 0, aim: value},
-            _ => Positioning{x: 0, y: 0, aim: 0}
+            "forward" => Positioning{x: value, y: 0},
+            "up" => Positioning{x: 0, y: -value},
+            "down" => Positioning{x: 0, y: value},
+            _ => Positioning{x: 0, y: 0}
+        }
+    }
+
+    fn reduce(self, next: Positioning) -> Positioning {
+        Positioning {
+            x: self.x + next.x,
+            y: self.y + next.y,
         }
     }
 }
+
+impl Display for Positioning {
+    fn fmt(&self, formatter: &mut Formatter) -> Result<(), Error> { 
+        write!(formatter, "({}, {}) -> {}", self.x, self.y, self.x * self.y)
+    }
+}
+
+struct AimPositioning {
+    x: i32,
+    y: i32,
+    aim: i32
+}
+
+impl AimPositioning {
+    fn new(direction: &str, value: i32) -> Self {
+        match direction {
+            "forward" => AimPositioning{x: value, y: 0, aim: 0},
+            "up" => AimPositioning{x: 0, y: 0, aim: -value},
+            "down" => AimPositioning{x: 0, y: 0, aim: value},
+            _ => AimPositioning{x: 0, y: 0, aim: 0}
+        }
+    }
+
+    fn reduce(self, next: AimPositioning) -> AimPositioning {
+        AimPositioning {
+            x: self.x + next.x,
+            y: self.y + self.aim * next.x,
+            aim: self.aim + next.aim
+        }
+    }
+}
+
+impl Display for AimPositioning {
+    fn fmt(&self, formatter: &mut Formatter) -> Result<(), Error> { 
+        write!(formatter, "({}, {}) -> {}", self.x, self.y, self.x * self.y)
+    }
+}
+
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -27,39 +73,23 @@ fn main() {
 
     let silver = contents.lines()
         .map(|line| line.split(" ").collect::<Vec<&str>>())
-        .map(|splits| (splits[0], splits[1]))
-        .map(|(movement, step_string)| {
-            let step_size = step_string.parse::<i32>().unwrap();
-            match movement {
-                "forward" => (0, step_size),
-                "up" => (-step_size, 0),
-                "down" => (step_size, 0),
-                _ => (0, 0),
-            }
-        })
-        .reduce(|(x1, y1), (x2, y2)| (x1 + x2, y1 + y2));
+        .map(|splits| (splits[0], splits[1].parse::<i32>().unwrap()))
+        .map(|(_1, _2)| Positioning::new(_1, _2))
+        .reduce(Positioning::reduce);
 
     match silver {
-        Some(value) => println!("Silver: ({}, {}), {}", value.0, value.1, value.0 * value.1),
+        Some(value) => println!("Silver: {}", value),
         None => println!("Failed")
     }
     
     let gold = contents.lines()
         .map(|line| line.split(" ").collect::<Vec<&str>>())
         .map(|splits| (splits[0], splits[1].parse::<i32>().unwrap()))
-        .map(|(_1, _2)| Positioning::new(_1, _2))
-        .reduce(|previous, current| {
-            return Positioning {
-                x: previous.x + current.x,
-                y: previous.y + previous.aim * current.x,
-                aim: previous.aim + current.aim
-            }
-        });
+        .map(|(_1, _2)| AimPositioning::new(_1, _2))
+        .reduce(AimPositioning::reduce);
 
     match gold {
-        Some(value) => println!("Silver: ({}, {}), {}", value.x, value.y, value.y * value.x),
+        Some(value) => println!("Gold: {}", value),
         None => println!("Failed")
     }
-        
-
 }
