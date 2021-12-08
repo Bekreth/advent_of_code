@@ -90,7 +90,6 @@ fn main() {
 
         let gold = count.iter()
             .map(|line| {
-                println!("{:?}", line);
                 line.iter().enumerate()
                     .map(|(i, e)| {
                         (10 as u32).pow(3 - i as u32) * (*e as u32)

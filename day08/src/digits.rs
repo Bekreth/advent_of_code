@@ -46,8 +46,6 @@ pub fn get_order<'a, T: Digit + ?Sized>(hints: &[Box<T>; 4]) -> [Box<dyn Digit>;
     let mut one = 0;
     let mut four = 0;
     let mut seven = 0;
-    let mut eight = 0;
-
 
     for h in hints.iter() {
         let mask = h.get_mask();
@@ -55,7 +53,6 @@ pub fn get_order<'a, T: Digit + ?Sized>(hints: &[Box<T>; 4]) -> [Box<dyn Digit>;
             2 => one = mask,
             4 => four = mask,
             3 => seven = mask,
-            7 => eight = mask,
             _ => ()
         }
     }
@@ -295,7 +292,7 @@ impl Digit for Six {
             return false;
         }
         let input_bits = assign_bitmask(input);
-        let mut masked_value = input_bits ^ (input_bits & self.seven_mask);
+        let masked_value = input_bits ^ (input_bits & self.seven_mask);
         if count_bits(masked_value) != 4 {
             return false;
         }
@@ -382,7 +379,7 @@ impl Digit for Nine {
         if input.len() != 6 {
             return false;
         }
-        let mut masked_value = assign_bitmask(input) ^ self.four_mask;
+        let masked_value = assign_bitmask(input) ^ self.four_mask;
         if count_bits(masked_value) != 2 {
             return false;
         }
