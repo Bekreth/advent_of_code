@@ -3,35 +3,22 @@ use array_init::array_init;
 
 use octopus::Octopus;
 
-fn max(i: usize, j: usize) -> usize {
-    if i > j { i }
-    else { j }
+pub struct Grid {
+    octopi: [[Octopus; 10]; 10],
 }
 
-fn min(i: usize, j: usize) -> usize {
-    if i < j { i }
-    else { j }
-}
-
-pub struct Grid<'a> {
-    octopi: [[&'a mut Octopus; 10]; 10]
-}
-
-impl <'a> Grid<'a> {
+impl  Grid {
     pub fn new() -> Self {
-        todo!()
-        /*
         return Grid{
             octopi: array_init(|_| {
                 array_init(|_| {
-                    &Octopus::new()
+                    Octopus::new()
                 })
             }),
         };
-    */
     } 
 
-    pub fn initialize_octopus(self, x: usize, y: usize, number: u8) {
+    pub fn initialize_octopus(&mut self, x: usize, y: usize, number: u8) {
         self.octopi[x][y].set_energy_level(number)
     }
 
@@ -39,18 +26,21 @@ impl <'a> Grid<'a> {
         for i in 0..10 {
             for j in 0..10 {
                 self.octopi[i][j].increment_energy();
-                self.octopi[i][j].try_falsh();
             }
         } 
 
         loop {
-            let flashes = self.octopi.iter()
+            let flashes = self.octopi.iter_mut()
                 .enumerate()
                 .map(|(x, octopi_row)| {
-                    let output: Vec<(usize, usize)> = octopi_row.iter()
+                    let output: Vec<(usize, usize)> = octopi_row.iter_mut()
                         .enumerate()
-                        .filter(|(_, octopus)| octopus.try_falsh())
-                        .map(|(y, _)| (x, y))
+                        .filter_map(|(y, octopus)| {
+                            match octopus.try_flash() {
+                                true => Some((x, y)),
+                                false => None
+                            }
+                        })
                         .collect::<Vec<(usize, usize)>>();
                     return output;
                 })
@@ -63,17 +53,48 @@ impl <'a> Grid<'a> {
 
             flashes.iter()
                 .for_each(|(x, y)| {
-                    for i in min(0, x - 1)..max(10, x + 1) {
-                        for j in min(0, y - 1)..max(10, y + 1) {
+                    let min_x = if *x == 0 { 0 } else { x - 1 };
+                    let max_x = if *x == 9 { 10 } else { x + 2 };
+                    let min_y = if *y == 0 { 0 } else { y - 1 };
+                    let max_y = if *y == 9 { 10 } else { y + 2 };
+                    for i in min_x..max_x {
+                        for j in min_y..max_y {
                             self.octopi[i][j].counter_flase();
                         }
                     }
                 });
         }
+
+        for i in 0..10 {
+            for j in 0..10 {
+                self.octopi[i][j].reset();
+            }
+        } 
+    }
+
+    pub fn is_total_flash(&self) -> bool {
+        for i in 0..10 {
+            for j in 0..10 {
+                if self.octopi[i][j].get_energy_level() != 0{
+                    return false;
+                }
+            }
+        } 
+        return true;
+    }
+
+    pub fn get_flash_count(&self) -> u32 {
+        self.octopi.iter()
+            .map(|octopi_row| {
+                octopi_row.iter()
+                    .map(|octopus| octopus.get_flash_count())
+                    .fold(0 as u32, |summer, value| summer + value as u32)
+            })
+            .fold(0, |summer, value| summer + value)
     }
 }
 
-impl  Display for Grid<'_> {
+impl  Display for Grid {
     fn fmt(&self, formatter: &mut Formatter) -> Result<(), Error> { 
         for i in 0..10 {
             for j in 0..10 {

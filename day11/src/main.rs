@@ -18,17 +18,27 @@ fn main() {
         .enumerate()
         .for_each(|(i, line)| {
             line.chars()
-                .map(|c| c as u8)
+                .map(|c| c.to_digit(10).expect("") as u8)
                 .enumerate()
                 .for_each(|(j, number)| {
                     grid.initialize_octopus(i, j, number)
                 })
         });
     
-    for i in 0..3 {
+    let mut total_flash = 0;
+    let mut counter = 1;
+    loop {
         grid.run_loop();
-        println!("Line {} -------", i);
-        println!("{}", grid);
+        if total_flash == 0 && grid.is_total_flash() {
+            total_flash = counter;
+        }
+        if counter == 100 {
+            println!("Silver {}", grid.get_flash_count());
+        }
+        if total_flash != 0 {
+            break;
+        }
+        counter += 1;
     }
-    // println!("Silver {}", grid);
+    println!("Gold {}", total_flash);
 }
