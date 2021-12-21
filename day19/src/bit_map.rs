@@ -115,7 +115,6 @@ impl BitMap {
 
 #[cfg(test)]
 mod tests {
-
     use bit_map::BitMap;
 
     #[test]

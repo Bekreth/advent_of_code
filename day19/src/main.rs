@@ -31,7 +31,7 @@ fn main() {
 
     let content = fs::read_to_string(filename)
         .expect("failed to read file");
-    let scanners = content.lines()
+    let mut scanners: Vec<Scanner> = content.lines()
         .filter_map(|s| {
             match POINT_REGEX.captures(s) {
                 Some(capture) => {
@@ -59,5 +59,32 @@ fn main() {
             }
             acc
         });
+
+    let (head, tail) = scanners.split_at(1);
+
+    let mut collected_points = &head[0];
+    let mut collected_shifters = collected_points.bit_maps();
+
+    let mut remaining: Vec<&Scanner> = Vec::with_capacity(tail.len());
+    let mut slush: Vec<&Scanner> = Vec::with_capacity(tail.len());
+
+    for t in tail {
+        remaining.push(t);
+    }
+    
+    loop {
+        match remaining.pop() {
+            Some(scanner) => {
+                let this_bit_map = scanner.bit_maps();
+                
+                if false {
+                    slush.push(scanner);
+                }
+            },
+            None => {
+            }
+        }
+        // let bit_map = remained.pop();
+    }
 
 }

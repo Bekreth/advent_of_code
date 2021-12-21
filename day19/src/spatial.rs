@@ -7,11 +7,11 @@ enum Rotate {
     MINUX_Z,
 }
 
-#[derive(Debug)]
+#[derive(Clone, Copy, Debug)]
 pub struct Point {
-    x: i32,
-    y: i32,
-    z: i32,
+    pub x: i32,
+    pub y: i32,
+    pub z: i32,
 }
 
 impl Point {
