@@ -1,8 +1,22 @@
+#[macro_use]
+mod sailfish_number;
+
+
+/*
+use std::env;
 use std::fs;
+*/
 
 fn main() {
-    let filename = "input_data.txt";
-    let contents = fs::read_to_string(filename)
-        .expect("Unable to read file");
-    println!("{}", contents);
+    /*
+    let args: Vec<String> = env::args().collect();
+    let filename = args.get(1).expect("missing filename");
+
+    let content = fs::read_to_string(filename)
+        .expect("failed to read file");
+        */
+   
+
+    // println!("{}", contents);
+
 }
