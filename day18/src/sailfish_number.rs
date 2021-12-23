@@ -10,6 +10,14 @@ enum SailfishNumber<T> {
     }
 }
 
+enum Terminal {
+    True,
+    Left,
+    Right,
+    Neither,
+    False,
+}
+
 impl SailfishNumber<u32> {
     pub fn add(self, add_right: SailfishNumber<u32>) -> Self {
         SailfishNumber::Branch {
@@ -52,18 +60,58 @@ impl SailfishNumber<u32> {
         }
     }
 
+    fn terminal_branch(self) -> Terminal {
+        match self {
+            SailfishNumber::Leaf(_) => Terminal::False,
+            SailfishNumber::Branch{
+                left: L,
+                right: R,
+            } => {    
+                match (*L, *R) {
+                    (SailfishNumber::Leaf(_),  SailfishNumber::Leaf(_)) => Terminal::True,
+                    (_,  SailfishNumber::Leaf(_)) => Terminal::Left,
+                    (SailfishNumber::Leaf(_), _) => Terminal::Right,
+                    (_, _) => Terminal::Neither,
+                }
+            }
+        } 
+    }
+
     pub fn try_split(self, depth: u8) -> Self {
+        let terminus = self.terminal_branch();
         match self {
             SailfishNumber::Leaf(_) => self,
             SailfishNumber::Branch {
                 left: L,
                 right: R,
-            } => (
-                SailfishNumber::Branch {
-                    left: Box::new(L.try_split(depth + 1)),
-                    right: Box::new(R.try_split(depth + 1)),
+            } => {
+                if depth < 4 {
+                    SailfishNumber::Branch {
+                        left: Box::new(L.try_split(depth + 1)),
+                        right: Box::new(R.try_split(depth + 1)),
+                    }
+                } else {
+                    match terminus {
+                        Terminal::Left => (),
+                        Terminal::Right => (),
+                        Terminal::Neither => (),
+                        Terminal::True => (),
+                        Terminal::False => (),
+                    }
+                    // if self.terminal_branch() {
+                        // SailfishNumber::Branch {
+                            // left: Box::new(L.try_split(depth + 1)),
+                            // right: Box::new(R.try_split(depth + 1)),
+                        // }
+                    // }
+
+
+                    SailfishNumber::Branch {
+                        left: Box::new(L.try_split(depth + 1)),
+                        right: Box::new(R.try_split(depth + 1)),
+                    }
                 }
-            ),
+            },
         }
 
     }
@@ -181,7 +229,23 @@ mod test {
         let something = sail_fish_number!([[[[6,4],[0,0]],[[8,2],5]],[[8,[2,4]],[4,[9,1]]]]);
         assert_eq!(something.find_rightmost(), 1);
     }
-    
+
+    #[test]
+    fn test_terminal_branch() {
+        let terminal = sail_fish_number!([1, 2]);
+        assert_eq!(terminal.terminal_branch(), true);
+
+        let terminal = sail_fish_number!([1, [2, 3]]);
+        assert_eq!(terminal.terminal_branch(), false);
+
+        let terminal = sail_fish_number!([[2, 3], 1]);
+        assert_eq!(terminal.terminal_branch(), false);
+
+        let terminal = sail_fish_number!([[2, 3], [1,2]]);
+        assert_eq!(terminal.terminal_branch(), false);
+
+    }
+
     #[test]
     fn test_split() {
         let do_nothing = sail_fish_number!([4, 5]);
