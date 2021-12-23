@@ -1,6 +1,8 @@
 use std::fmt::{Display, Formatter, Error};
 use std::str::Lines;
 
+const BUFFER: usize = 4;
+
 pub struct Image {
     processor: Vec<bool>,
     zero_value: bool,
@@ -28,24 +30,18 @@ impl Image {
             '.' => false,
             _ => false,
         };
-        let last_value = match key.chars().last().expect("should have gotten last") {
-            '#' => true,
-            '.' => false,
-            _ => false,
-        };
 
         let first_line = lines.next().expect("Failed to parse");
         let width = first_line.len();
 
         let mut output = vec![
-            vec![false; 10 + width];
-            // vec![zero_value; 20 + width];
-            10 + width
+            vec![false; BUFFER + width];
+            BUFFER + width
         ];
         first_line.chars().enumerate().for_each(|(j, c)| {
             match c {
-                '#' => output[5][j + 5] = true,
-                '.' => output[5][j + 5] = false,
+                '#' => output[BUFFER/2][j + BUFFER/2] = true,
+                '.' => output[BUFFER/2][j + BUFFER/2] = false,
                 _ => (),
             }
         });
@@ -53,8 +49,8 @@ impl Image {
         lines.enumerate().for_each(|(i, line)|{
             line.chars().enumerate().for_each(|(j, c)| {
                 match c {
-                    '#' => output[i + 6][j + 5] = true,
-                    '.' => output[i + 6][j + 5] = false,
+                    '#' => output[i + BUFFER/2 + 1][j + BUFFER/2] = true,
+                    '.' => output[i + BUFFER/2 + 1][j + BUFFER/2] = false,
                     _ => (),
                 }
             });
@@ -64,7 +60,7 @@ impl Image {
         Image {
             processor: processor,
             zero_value: zero_value,
-            toggles_infinity: zero_value != last_value,
+            toggles_infinity: zero_value == true,
             data: output,
         }
     }
@@ -94,7 +90,7 @@ impl Image {
         Image {
             processor: self.processor.clone(),
             zero_value: if self.toggles_infinity { !self.zero_value } else { self.zero_value },
-            toggles_infinity: self.zero_value,
+            toggles_infinity: self.toggles_infinity,
             data: new_data,
         }
     }
@@ -113,7 +109,7 @@ impl Image {
         collected
     }
 
-    pub fn count(self) -> usize {
+    pub fn count(&self) -> usize {
         self.data.iter()
             .map(|x| {
                 x.iter().filter(|v| **v)
@@ -126,6 +122,7 @@ impl Image {
 
 impl Display for Image {
     fn fmt(&self, formatter: &mut Formatter) -> Result<(), Error> { 
+        writeln!(formatter, "Zero value {}", self.zero_value);
         self.data.iter()
             .for_each(|v| {
                 v.iter()

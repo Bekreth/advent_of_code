@@ -12,16 +12,18 @@ fn main() {
         .expect("Unable to read file");
     let mut lines = contents.lines();
 
-    let image = Image::new(&mut lines);
+    let mut image = Image::new(&mut lines);
+    let mut silver = 0;
 
-    println!("{}", image);
-    let new_image = image.iterate();
-    println!("");
-    println!("{}", new_image);
+    // println!("{}", image);
+    for i in 1..=50 {
+        image = image.iterate();
+        // println!("{}\n{}", i, image);
+        if i == 2 {
+            silver = image.count();
+        }
+    }
 
-    let new_image = new_image.iterate();
-    println!("");
-    println!("{}", new_image);
-
-    println!("Silver: {}", new_image.count())
+    println!("Silver: {}", silver);
+    println!("Gold: {}", image.count());
 }
