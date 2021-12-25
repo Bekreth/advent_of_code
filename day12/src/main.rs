@@ -4,9 +4,10 @@ extern crate lazy_static;
 mod cave;
 mod walker;
 
-use cave::CaveSystem;
-use walker::{Walker, SilverWalker};
+use cave::{CaveSystem, Cave};
+use walker::{Walker, SilverWalker, GoldWalker};
 
+use std::fmt::Display;
 use std::fs;
 use std::env;
 
@@ -18,15 +19,18 @@ fn main() {
         .expect("Unable to read file");
 
     let cave_system = CaveSystem::new(contents.clone());
-    let first_walker = SilverWalker::new();
 
-    let successful_walkers = walker_solver(first_walker, &cave_system);
+    let silver_walker = SilverWalker::new();
+    let silver_success = walker_solver(silver_walker, &cave_system);
+    println!("Silver: {:?}", silver_success.len());
 
-    println!("Silver: {:?}", successful_walkers.len());
+    let gold_walker = GoldWalker::new();
+    let gold_successes = walker_solver(gold_walker, &cave_system);
+    println!("Gold: {:?}", gold_successes.len());
 }
 
 
-fn walker_solver<T: Walker>(first_walker: T, cave_system: &CaveSystem) -> Vec<T> {
+fn walker_solver<T: Walker + Display>(first_walker: T, cave_system: &CaveSystem) -> Vec<Vec<Cave>> {
     let mut walkers = vec![first_walker];
     let mut finished_walkers = vec![];
     loop {
@@ -43,5 +47,11 @@ fn walker_solver<T: Walker>(first_walker: T, cave_system: &CaveSystem) -> Vec<T>
             }
         }
     }
-    finished_walkers
+    let mut output = finished_walkers.iter()
+        .map(|w| w.previously_visited())
+        .collect::<Vec<Vec<Cave>>>();
+
+    output.sort();
+    output.dedup();
+    output
 }
