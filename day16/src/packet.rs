@@ -1,4 +1,5 @@
 use bit_stream::BitStream;
+use std::iter::Take;
 
 #[derive(Debug)]
 struct Header {
@@ -27,7 +28,9 @@ enum Content {
 }
 
 impl Header {
-    fn new(bit_stream: &mut BitStream) -> Self {
+    fn new<T>(bit_stream: &mut T) -> Self 
+    where T: Iterator<Item = bool>
+    {
         let mut version: u8 = 0;
         let mut id: u8 = 0;
 
@@ -51,8 +54,8 @@ impl Header {
         } else {
             match bit_stream.next() {
                 None => panic!("Should have gotten"),
-                Some(true) => IType::BitCounter,
-                Some(false) => IType::PacketCounter,
+                Some(true) => IType::PacketCounter,
+                Some(false) => IType::BitCounter,
             }
         };
 
@@ -65,12 +68,22 @@ impl Header {
 }
 
 impl Packet {
-    pub fn new(bit_stream: &mut BitStream) -> Self {
-        let header = Header::new(bit_stream);
+    pub fn new<T>(bit_stream: &mut T) -> Self 
+    where T: Iterator<Item = bool>
+    {
+        let header = Header::new::<T>(bit_stream);
         let content = match header.id_type {
-            IType::Literal => parse_packet_literal(bit_stream),
-            IType::BitCounter => todo!(),
-            IType::PacketCounter => todo!(),
+            IType::Literal => parse_packet_literal::<T>(bit_stream),
+            IType::BitCounter => {
+                let bit_width = parse_wide_bit::<T>(bit_stream, 15);
+                let mut sub_packet_bits = bit_stream.take(bit_width as usize);
+                let packet = Packet::new(&mut sub_packet_bits);
+                Content::SubPacket(Box::new(packet))
+            },
+            IType::PacketCounter => {
+                // let packet_count = parse_wide_bit(bit_stream, 15);
+                todo!()
+            }
         };
         Packet {
             header: header,
@@ -79,7 +92,23 @@ impl Packet {
     }
 }
 
-fn parse_packet_literal(bit_stream: &mut BitStream) -> Content {
+fn parse_wide_bit<T>(bit_stream: &mut T, width: u8) -> u16 
+    where T: Iterator<Item = bool>
+    {
+    let mut output: u16 = 0;
+    for i in 0..width {
+        match bit_stream.next() {
+            None => panic!("Should have gotten"),
+            Some(true) => output |= 1 << (2 - i),
+            _ => (),
+        }
+    }
+    output
+}
+
+fn parse_packet_literal<T>(bit_stream: &mut T) -> Content 
+    where T: Iterator<Item = bool>
+    {
     let mut packet_collector = vec![];
     let mut should_break = false;
     loop {

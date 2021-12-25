@@ -15,7 +15,7 @@ fn main() {
         .expect("Unable to read file");
 
     let mut bit_stream = BitStream::new(contents); 
-    let packet = Packet::new(&mut bit_stream);
+    let packet = Packet::new::<BitStream>(&mut bit_stream);
 
     println!("Silver: {:?}", packet);
 }
