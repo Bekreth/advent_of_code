@@ -1,0 +1,1040 @@
+starting
+reading file: ../input/sample.txt
+file read
+
+finished reading
+
+
+
+== BAG ==
+Descriptor:	light
+Color:		red
+# of parents:	0
+ -Parents-
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	bright
+Color:		white
+Count		1
+ -C1
+Descriptor:	muted
+Color:		yellow
+Count		2
+== BAG ==
+Descriptor:	bright
+Color:		white
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	light
+Color:		red
+# of children:	1
+ -Children-
+ -C0
+Descriptor:	shiny
+Color:		gold
+Count		1
+
+
+
+
+== BAG ==
+Descriptor:	dark
+Color:		orange
+# of parents:	0
+ -Parents-
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	bright
+Color:		white
+Count		3
+ -C1
+Descriptor:	muted
+Color:		yellow
+Count		4
+== BAG ==
+Descriptor:	bright
+Color:		white
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	light
+Color:		red
+ -P1
+Descriptor:	dark
+Color:		orange
+# of children:	1
+ -Children-
+ -C0
+Descriptor:	shiny
+Color:		gold
+Count		1
+
+
+
+
+== BAG ==
+Descriptor:	light
+Color:		red
+# of parents:	0
+ -Parents-
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	bright
+Color:		white
+Count		1
+ -C1
+Descriptor:	muted
+Color:		yellow
+Count		2
+== BAG ==
+Descriptor:	muted
+Color:		yellow
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	light
+Color:		red
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	shiny
+Color:		gold
+Count		2
+ -C1
+Descriptor:	faded
+Color:		blue
+Count		9
+
+
+
+
+== BAG ==
+Descriptor:	dark
+Color:		orange
+# of parents:	0
+ -Parents-
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	bright
+Color:		white
+Count		3
+ -C1
+Descriptor:	muted
+Color:		yellow
+Count		4
+== BAG ==
+Descriptor:	muted
+Color:		yellow
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	light
+Color:		red
+ -P1
+Descriptor:	dark
+Color:		orange
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	shiny
+Color:		gold
+Count		2
+ -C1
+Descriptor:	faded
+Color:		blue
+Count		9
+
+
+
+
+== BAG ==
+Descriptor:	bright
+Color:		white
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	light
+Color:		red
+ -P1
+Descriptor:	dark
+Color:		orange
+# of children:	1
+ -Children-
+ -C0
+Descriptor:	shiny
+Color:		gold
+Count		1
+== BAG ==
+Descriptor:	shiny
+Color:		gold
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	bright
+Color:		white
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	dark
+Color:		olive
+Count		1
+ -C1
+Descriptor:	vibrant
+Color:		plum
+Count		2
+
+
+
+
+== BAG ==
+Descriptor:	muted
+Color:		yellow
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	light
+Color:		red
+ -P1
+Descriptor:	dark
+Color:		orange
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	shiny
+Color:		gold
+Count		2
+ -C1
+Descriptor:	faded
+Color:		blue
+Count		9
+== BAG ==
+Descriptor:	shiny
+Color:		gold
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	bright
+Color:		white
+ -P1
+Descriptor:	muted
+Color:		yellow
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	dark
+Color:		olive
+Count		1
+ -C1
+Descriptor:	vibrant
+Color:		plum
+Count		2
+
+
+
+
+== BAG ==
+Descriptor:	bright
+Color:		white
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	light
+Color:		red
+ -P1
+Descriptor:	dark
+Color:		orange
+# of children:	1
+ -Children-
+ -C0
+Descriptor:	shiny
+Color:		gold
+Count		1
+== BAG ==
+Descriptor:	shiny
+Color:		gold
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	bright
+Color:		white
+ -P1
+Descriptor:	muted
+Color:		yellow
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	dark
+Color:		olive
+Count		1
+ -C1
+Descriptor:	vibrant
+Color:		plum
+Count		2
+
+
+
+
+== BAG ==
+Descriptor:	muted
+Color:		yellow
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	light
+Color:		red
+ -P1
+Descriptor:	dark
+Color:		orange
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	shiny
+Color:		gold
+Count		2
+ -C1
+Descriptor:	faded
+Color:		blue
+Count		9
+== BAG ==
+Descriptor:	shiny
+Color:		gold
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	bright
+Color:		white
+ -P1
+Descriptor:	muted
+Color:		yellow
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	dark
+Color:		olive
+Count		1
+ -C1
+Descriptor:	vibrant
+Color:		plum
+Count		2
+
+
+
+
+== BAG ==
+Descriptor:	shiny
+Color:		gold
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	bright
+Color:		white
+ -P1
+Descriptor:	muted
+Color:		yellow
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	dark
+Color:		olive
+Count		1
+ -C1
+Descriptor:	vibrant
+Color:		plum
+Count		2
+== BAG ==
+Descriptor:	dark
+Color:		olive
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	shiny
+Color:		gold
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	faded
+Color:		blue
+Count		3
+ -C1
+Descriptor:	dotted
+Color:		black
+Count		4
+
+
+
+
+== BAG ==
+Descriptor:	shiny
+Color:		gold
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	bright
+Color:		white
+ -P1
+Descriptor:	muted
+Color:		yellow
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	dark
+Color:		olive
+Count		1
+ -C1
+Descriptor:	vibrant
+Color:		plum
+Count		2
+== BAG ==
+Descriptor:	dark
+Color:		olive
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	shiny
+Color:		gold
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	faded
+Color:		blue
+Count		3
+ -C1
+Descriptor:	dotted
+Color:		black
+Count		4
+
+
+
+
+== BAG ==
+Descriptor:	shiny
+Color:		gold
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	bright
+Color:		white
+ -P1
+Descriptor:	muted
+Color:		yellow
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	dark
+Color:		olive
+Count		1
+ -C1
+Descriptor:	vibrant
+Color:		plum
+Count		2
+== BAG ==
+Descriptor:	dark
+Color:		olive
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	shiny
+Color:		gold
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	faded
+Color:		blue
+Count		3
+ -C1
+Descriptor:	dotted
+Color:		black
+Count		4
+
+
+
+
+== BAG ==
+Descriptor:	shiny
+Color:		gold
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	bright
+Color:		white
+ -P1
+Descriptor:	muted
+Color:		yellow
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	dark
+Color:		olive
+Count		1
+ -C1
+Descriptor:	vibrant
+Color:		plum
+Count		2
+== BAG ==
+Descriptor:	dark
+Color:		olive
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	shiny
+Color:		gold
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	faded
+Color:		blue
+Count		3
+ -C1
+Descriptor:	dotted
+Color:		black
+Count		4
+
+
+
+
+== BAG ==
+Descriptor:	shiny
+Color:		gold
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	bright
+Color:		white
+ -P1
+Descriptor:	muted
+Color:		yellow
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	dark
+Color:		olive
+Count		1
+ -C1
+Descriptor:	vibrant
+Color:		plum
+Count		2
+== BAG ==
+Descriptor:	vibrant
+Color:		plum
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	shiny
+Color:		gold
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	faded
+Color:		blue
+Count		5
+ -C1
+Descriptor:	dotted
+Color:		black
+Count		6
+
+
+
+
+== BAG ==
+Descriptor:	shiny
+Color:		gold
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	bright
+Color:		white
+ -P1
+Descriptor:	muted
+Color:		yellow
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	dark
+Color:		olive
+Count		1
+ -C1
+Descriptor:	vibrant
+Color:		plum
+Count		2
+== BAG ==
+Descriptor:	vibrant
+Color:		plum
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	shiny
+Color:		gold
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	faded
+Color:		blue
+Count		5
+ -C1
+Descriptor:	dotted
+Color:		black
+Count		6
+
+
+
+
+== BAG ==
+Descriptor:	shiny
+Color:		gold
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	bright
+Color:		white
+ -P1
+Descriptor:	muted
+Color:		yellow
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	dark
+Color:		olive
+Count		1
+ -C1
+Descriptor:	vibrant
+Color:		plum
+Count		2
+== BAG ==
+Descriptor:	vibrant
+Color:		plum
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	shiny
+Color:		gold
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	faded
+Color:		blue
+Count		5
+ -C1
+Descriptor:	dotted
+Color:		black
+Count		6
+
+
+
+
+== BAG ==
+Descriptor:	shiny
+Color:		gold
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	bright
+Color:		white
+ -P1
+Descriptor:	muted
+Color:		yellow
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	dark
+Color:		olive
+Count		1
+ -C1
+Descriptor:	vibrant
+Color:		plum
+Count		2
+== BAG ==
+Descriptor:	vibrant
+Color:		plum
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	shiny
+Color:		gold
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	faded
+Color:		blue
+Count		5
+ -C1
+Descriptor:	dotted
+Color:		black
+Count		6
+
+
+
+
+== BAG ==
+Descriptor:	dark
+Color:		olive
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	shiny
+Color:		gold
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	faded
+Color:		blue
+Count		3
+ -C1
+Descriptor:	dotted
+Color:		black
+Count		4
+== BAG ==
+Descriptor:	faded
+Color:		blue
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	dark
+Color:		olive
+# of children:	0
+ -Children-
+
+
+
+
+== BAG ==
+Descriptor:	vibrant
+Color:		plum
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	shiny
+Color:		gold
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	faded
+Color:		blue
+Count		5
+ -C1
+Descriptor:	dotted
+Color:		black
+Count		6
+== BAG ==
+Descriptor:	faded
+Color:		blue
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	dark
+Color:		olive
+ -P1
+Descriptor:	vibrant
+Color:		plum
+# of children:	0
+ -Children-
+
+
+
+
+== BAG ==
+Descriptor:	dark
+Color:		olive
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	shiny
+Color:		gold
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	faded
+Color:		blue
+Count		3
+ -C1
+Descriptor:	dotted
+Color:		black
+Count		4
+== BAG ==
+Descriptor:	faded
+Color:		blue
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	dark
+Color:		olive
+ -P1
+Descriptor:	vibrant
+Color:		plum
+# of children:	0
+ -Children-
+
+
+
+
+== BAG ==
+Descriptor:	vibrant
+Color:		plum
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	shiny
+Color:		gold
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	faded
+Color:		blue
+Count		5
+ -C1
+Descriptor:	dotted
+Color:		black
+Count		6
+== BAG ==
+Descriptor:	faded
+Color:		blue
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	dark
+Color:		olive
+ -P1
+Descriptor:	vibrant
+Color:		plum
+# of children:	0
+ -Children-
+
+
+
+
+== BAG ==
+Descriptor:	muted
+Color:		yellow
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	light
+Color:		red
+ -P1
+Descriptor:	dark
+Color:		orange
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	shiny
+Color:		gold
+Count		2
+ -C1
+Descriptor:	faded
+Color:		blue
+Count		9
+== BAG ==
+Descriptor:	faded
+Color:		blue
+# of parents:	3
+ -Parents-
+ -P0
+Descriptor:	dark
+Color:		olive
+ -P1
+Descriptor:	vibrant
+Color:		plum
+ -P2
+Descriptor:	muted
+Color:		yellow
+# of children:	0
+ -Children-
+
+
+
+
+== BAG ==
+Descriptor:	dark
+Color:		olive
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	shiny
+Color:		gold
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	faded
+Color:		blue
+Count		3
+ -C1
+Descriptor:	dotted
+Color:		black
+Count		4
+== BAG ==
+Descriptor:	faded
+Color:		blue
+# of parents:	3
+ -Parents-
+ -P0
+Descriptor:	dark
+Color:		olive
+ -P1
+Descriptor:	vibrant
+Color:		plum
+ -P2
+Descriptor:	muted
+Color:		yellow
+# of children:	0
+ -Children-
+
+
+
+
+== BAG ==
+Descriptor:	vibrant
+Color:		plum
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	shiny
+Color:		gold
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	faded
+Color:		blue
+Count		5
+ -C1
+Descriptor:	dotted
+Color:		black
+Count		6
+== BAG ==
+Descriptor:	faded
+Color:		blue
+# of parents:	3
+ -Parents-
+ -P0
+Descriptor:	dark
+Color:		olive
+ -P1
+Descriptor:	vibrant
+Color:		plum
+ -P2
+Descriptor:	muted
+Color:		yellow
+# of children:	0
+ -Children-
+
+
+
+
+== BAG ==
+Descriptor:	dark
+Color:		olive
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	shiny
+Color:		gold
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	faded
+Color:		blue
+Count		3
+ -C1
+Descriptor:	dotted
+Color:		black
+Count		4
+== BAG ==
+Descriptor:	faded
+Color:		blue
+# of parents:	3
+ -Parents-
+ -P0
+Descriptor:	dark
+Color:		olive
+ -P1
+Descriptor:	vibrant
+Color:		plum
+ -P2
+Descriptor:	muted
+Color:		yellow
+# of children:	0
+ -Children-
+
+
+
+
+== BAG ==
+Descriptor:	vibrant
+Color:		plum
+# of parents:	1
+ -Parents-
+ -P0
+Descriptor:	shiny
+Color:		gold
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	faded
+Color:		blue
+Count		5
+ -C1
+Descriptor:	dotted
+Color:		black
+Count		6
+== BAG ==
+Descriptor:	faded
+Color:		blue
+# of parents:	3
+ -Parents-
+ -P0
+Descriptor:	dark
+Color:		olive
+ -P1
+Descriptor:	vibrant
+Color:		plum
+ -P2
+Descriptor:	muted
+Color:		yellow
+# of children:	0
+ -Children-
+
+
+
+
+== BAG ==
+Descriptor:	muted
+Color:		yellow
+# of parents:	2
+ -Parents-
+ -P0
+Descriptor:	light
+Color:		red
+ -P1
+Descriptor:	dark
+Color:		orange
+# of children:	2
+ -Children-
+ -C0
+Descriptor:	shiny
+Color:		gold
+Count		2
+ -C1
+Descriptor:	faded
+Color:		blue
+Count		9
+== BAG ==
+Descriptor:	faded
+Color:		blue
+# of parents:	3
+ -Parents-
+ -P0
+Descriptor:	dark
+Color:		olive
+ -P1
+Descriptor:	vibrant
+Color:		plum
+ -P2
+Descriptor:	muted
+Color:		yellow
+# of children:	0
+ -Children-
+
+

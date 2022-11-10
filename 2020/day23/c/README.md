@@ -1,0 +1,1 @@
+To solve this in any reasonable time, you'll need to use a hashmap
