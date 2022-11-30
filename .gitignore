@@ -3,6 +3,8 @@ target/
 
 # IDE
 *.vscode
+*.swp
+*.swo
 build/
 
 # Prerequisites
