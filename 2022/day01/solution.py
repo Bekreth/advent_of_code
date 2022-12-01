@@ -1,19 +1,6 @@
-import sys
-
-silver = 0
-elves = []
-
-file = open('d')
-lines = file.readlines()
-currentValue = 0
-for line in lines:
-    if line == "\n":
-        elves += [currentValue]
-        currentValue = 0
-    else:
-        currentValue += int(line)
-
-output = sorted(elves)
-print(output[len(elves) - 1])
-print(sum(output[len(elves) - 3:len(elves)]))
-
+E=[0]
+for l in open('sample'):
+ if l=="\n":E=[0]+E
+ else:E=[E[0]+int(l)]+E[1:]
+o=sorted(E)[-3:]
+print(f"{o[2]}\n{sum(o)}")
