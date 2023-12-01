@@ -34,7 +34,6 @@ gold_adder = Adder()
 for line in open("input.txt"):
     silver_line = line
     gold_line = make_gold_line(line)
-    print(gold_line.strip())
     for character in silver_line:
         if character.isdigit():
             silver_adder.handle_character(character)
