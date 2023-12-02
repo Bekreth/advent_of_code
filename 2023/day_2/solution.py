@@ -1,4 +1,3 @@
-
 class Hand:
     red: int
     blue: int
