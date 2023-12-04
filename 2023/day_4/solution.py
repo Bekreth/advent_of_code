@@ -15,4 +15,4 @@ for i, line in enumerate(open("input.txt")):
         cards[j] += cards[i]
 
 
-print("S:", silver,"\nG", sum(cards))
+print("S:", silver,"\nG:", sum(cards))
