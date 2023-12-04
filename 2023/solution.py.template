@@ -1,0 +1,8 @@
+silver = 0
+gold = 0
+
+for line in open("sample.txt")
+    
+
+
+print("S:", silver,"\nG", gold)
