@@ -1,19 +1,13 @@
-from enum import Enum
-
-class Direction(Enum):
-    Up = 0
-    Right = 1
-    Down = 2
-    Left = 3
+from walker import path_check
+import copy
 
 silver = 0
 
 obstacle_map = []
 guard_position = (0, 0)
-direction = Direction.Up
 i = 0
 max_x = 0
-for line in open("input.txt"):
+for line in open("sample.txt"):
     j = 0
     for c in line.strip():
         if c == '#':
@@ -45,82 +39,31 @@ for key, value in x_map.items():
 for key, value in y_map.items():
     value.sort()
 
-locations_visited = set()
-walk_counter = 0
-while True:
-    breaker = False
-    loop_set = set()
-    #print()
-    #print(direction)
-    #print("Guard", guard_position)
-    #print(locations_visited)
-    match direction:
-        case Direction.Up:
-            y_values = x_map[guard_position[0]]
-            possible_values = [y for y in y_values if y < guard_position[1]]
-            new_position = (guard_position[0], -1)
-            if len(possible_values) == 0:
-                breaker = True
-            else:
-                new_position = (guard_position[0], possible_values[-1] + 1)
-            print(possible_values)
-            print("Next", new_position)
-            for i in range(new_position[1], guard_position[1] + 1):
-                locations_visited.add((guard_position[0], i))
-                loop_set.add((guard_position[0], i))
-            guard_position = new_position
-            direction = Direction.Right
+paths_traveled = list(path_check(guard_position, x_map, y_map, max_x, max_y)[1])
+paths_traveled.sort()
 
-        case Direction.Right:
-            x_values = y_map[guard_position[1]]
-            possible_values = [x for x in x_values if x > guard_position[0]]
-            new_position = (max_x, guard_position[1])
-            if len(possible_values) == 0:
-                breaker = True
-            else:
-                new_position = (possible_values[0] - 1, guard_position[1])
-            print(possible_values)
-            print("Next", new_position)
-            for i in range(guard_position[0], new_position[0] + 1):
-                locations_visited.add((i, guard_position[1]))
-                loop_set.add((i, guard_position[1]))
-            guard_position = new_position
-            direction = Direction.Down
+# TODO: (7,6) and (7,7) from sample fails.  Add a line round by round break to sort that out
+gold_counter = 0
+print(paths_traveled)
+for (x, y) in paths_traveled:
+    if x in x_map and y in x_map[x]:
+        continue
+    new_x_map = copy.deepcopy(x_map)
+    new_y_map = copy.deepcopy(y_map)
+    if x in new_x_map:
+        new_x_map[x].append(y)
+    else:
+        new_x_map[x] = [y]
+    if y in new_y_map:
+        new_y_map[y].append(x)
+    else:
+        new_y_map[y] = [x]
+    
+    if path_check(guard_position, new_x_map, new_y_map, max_x, max_y)[0]:
+        print((x, y), "Success!")
+        gold_counter += 1
+    else:
+        print((x, y), "Fail!")
 
-        case Direction.Down:
-            y_values = x_map[guard_position[0]]
-            possible_values = [y for y in y_values if y > guard_position[1]]
-            new_position = (guard_position[0], max_y)
-            if len(possible_values) == 0:
-                breaker = True
-            else:
-                new_position = (guard_position[0], possible_values[0] - 1)
-            print(possible_values)
-            print("Next", new_position)
-            for i in range(guard_position[1], new_position[1] + 1):
-                locations_visited.add((guard_position[0], i))
-                loop_set.add((guard_position[0], i))
-            guard_position = new_position
-            direction = Direction.Left
-
-        case Direction.Left:
-            x_values = y_map[guard_position[1]]
-            possible_values = [x for x in x_values if x < guard_position[0]]
-            new_position = (-1, guard_position[1])
-            if len(possible_values) == 0:
-                breaker = True
-            else:
-                new_position = (possible_values[-1] + 1, guard_position[1])
-            print(possible_values)
-            print("Next", new_position)
-            for i in range(new_position[0], guard_position[0]):
-                locations_visited.add((i, guard_position[1]))
-                loop_set.add((i, guard_position[1]))
-            guard_position = new_position
-            direction = Direction.Up
-    #print("This loop:", loop_set)
-    #input("...")
-    if breaker:
-        break
-
-print("Silver:", len(locations_visited))
+print("Silver", len(paths_traveled) - 1)
+print("Gold", gold_counter)
