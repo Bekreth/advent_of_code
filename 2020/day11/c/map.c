@@ -29,7 +29,6 @@ Space* newState(int row, int column, char state) {
     return output;
 }
 
-/*
 void primeSimulation(Space* space, Map* map) {
     if (space->State == FLOOR) return;
     int counter = 0;
@@ -47,7 +46,6 @@ void primeSimulation(Space* space, Map* map) {
         if (counter >= 4) space->NextState = SEAT;
     }
 }
-*/
 
 void applySimulation(Space* space) {
     space->State = space->NextState;
